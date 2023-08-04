@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        //Due to null origin this needs to be run on a web server
+        /*
+            sudo systemctl status apache2
+            sudo cp client.html /var/www/html/
+            sudo chmod 755 /var/www/html/client.html
+
+            // use this to send messages from console
+            socket.send("New message!")
+        */
+        let socket = new WebSocket("ws://localhost:3001/ws");
+
+        socket.onopen = (event) => {
+            console.log("WebSocket is open now.");
+            socket.send("hello from client");
+        };
+
+        socket.onmessage = (event) => {
+            console.log("received from the server:", event.data);
+        };
+    </script>
+</body>
+</html>

@@ -9,7 +9,7 @@ Most of the code in this repository can be executed as follows:
 2. Clone this repository: git clone https://github.com/voukatas/golang-projects.git
 3. Navigate into each individual folder and run go run main.go (or whichever file you'd like to run).
 
-#W Progress
+# Progress
 This journey is ongoing, and as I continue learning, this repository will be updated with new projects and concepts. Check back often for updates!
 
 # Connect with me
