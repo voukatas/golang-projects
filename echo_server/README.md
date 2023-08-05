@@ -4,6 +4,6 @@ A simple TCP echo server written in Go. This server listens for incoming connect
 
 ## Getting Started
 
-```
+```bash
 go run echo_server.go
 ```
