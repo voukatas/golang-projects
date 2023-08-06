@@ -12,6 +12,9 @@ import (
 func echo(conn net.Conn) {
 	defer conn.Close()
 
+	// using bufio you avoid handling the buffer (eg. make([]byte, 1024) and the EOF and other low level staff)
+	// the writer is similar to other langs, it outputs the data when the buffer is full or when you explicitly call it
+
 	reader := bufio.NewReader(conn)
 	writer := bufio.NewWriter(conn)
 
@@ -48,7 +51,7 @@ func main() {
 	shutdown := make(chan struct{})
 
 	// Graceful shutdown
-	sigCh := make(chan os.Signal, 1)
+	sigCh := make(chan os.Signal, 1) //It's a common idiom in Go when dealing with os signals
 	signal.Notify(sigCh, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
 		<-sigCh // // value struct{}{}

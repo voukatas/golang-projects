@@ -27,11 +27,16 @@ func (s *Server) handleWS(ws *websocket.Conn) {
 	s.mu.Unlock()
 
 	// in case you have read and write separately, and you use goroutines you need to synchronize the access to the WS connection
+	// if you have only one goroutine to do the writing it will not be an issue but lets assume that go readLoop writes also at the end
 	/*
 		type SafeWebSocket struct {
 			conn *websocket.Conn
 			mux  sync.Mutex
 		}
+
+		safeWs := &SafeWebSocket{
+		conn: ws,
+	}
 
 	*/
 	// go s.readLoop(safeWs)
@@ -44,7 +49,7 @@ func (s *Server) handleWS(ws *websocket.Conn) {
 	s.mu.Unlock()
 }
 
-func (s *Server) readLoop(ws *websocket.Conn) {
+func (s *Server) readLoop(ws *websocket.Conn) { //safeWs *SafeWebSocket
 	buf := make([]byte, 1024)
 	for {
 		//safeWs.mux.Lock()
